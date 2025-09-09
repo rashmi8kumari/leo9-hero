@@ -13,7 +13,8 @@ function Hero() {
       style={{
         background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
         minHeight: "100vh",
-        paddingTop: "80px", // Navbar ka overlap hata diya
+        paddingTop: "80px",
+        boxSizing: "border-box",
       }}
     >
       <div className="container">
