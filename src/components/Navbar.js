@@ -2,11 +2,28 @@ import React, { useEffect, useState } from "react";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // detect active section
+      const sections = document.querySelectorAll("section");
+      let current = "home";
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 100; // offset for navbar height
+        const sectionHeight = section.clientHeight;
+
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      setActiveSection(current);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -18,7 +35,7 @@ function Navbar() {
       }`}
     >
       <div className="container">
-        <a className="navbar-brand fw-bold fs-3" href="#">
+        <a className="navbar-brand fw-bold fs-3" href="#home">
           YourLogo
         </a>
         <button
@@ -35,22 +52,34 @@ function Navbar() {
         >
           <ul className="navbar-nav">
             <li className="nav-item mx-2">
-              <a className="nav-link" href="#home">
+              <a
+                className={`nav-link ${activeSection === "home" ? "active fw-bold" : ""}`}
+                href="#home"
+              >
                 Home
               </a>
             </li>
             <li className="nav-item mx-2">
-              <a className="nav-link" href="#about">
+              <a
+                className={`nav-link ${activeSection === "about" ? "active fw-bold" : ""}`}
+                href="#about"
+              >
                 About
               </a>
             </li>
             <li className="nav-item mx-2">
-              <a className="nav-link" href="#services">
+              <a
+                className={`nav-link ${activeSection === "services" ? "active fw-bold" : ""}`}
+                href="#services"
+              >
                 Services
               </a>
             </li>
             <li className="nav-item mx-2">
-              <a className="btn btn-dark px-4" href="#contact">
+              <a
+                className={`nav-link ${activeSection === "contact" ? "active fw-bold" : ""}`}
+                href="#contact"
+              >
                 Contact
               </a>
             </li>
@@ -62,4 +91,5 @@ function Navbar() {
 }
 
 export default Navbar;
+
 
