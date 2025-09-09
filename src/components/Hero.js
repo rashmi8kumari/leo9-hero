@@ -9,9 +9,11 @@ function Hero() {
   return (
     <section
       id="home"
-      className="d-flex align-items-center vh-100 text-center text-light"
+      className="d-flex align-items-center text-center text-light"
       style={{
         background: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",
+        minHeight: "100vh",
+        paddingTop: "80px", // Navbar ka overlap hata diya
       }}
     >
       <div className="container">
@@ -33,4 +35,5 @@ function Hero() {
 }
 
 export default Hero;
+
 
